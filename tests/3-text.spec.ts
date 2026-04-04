@@ -1,6 +1,31 @@
-import test, { expect } from "@playwright/test";
+import { test, expect } from '@playwright/test';
 
-// Actions with text, textContent(), allTextContent(), innerText(), and allInnerText()
+/*
+Actions with text: textContent(), allTextContent(), innerText(), and allInnerText()
+
+Purpose & idea
+- `textContent()` retrieves the text content of an element, including hidden elements.
+- `innerText()` retrieves the visible text content of an element, excluding hidden elements.
+
+Note: DOM rendering behavior may vary slightly across browser engines.
+Behaviour of DOMs:
+- `display: none`
+    - Element is removed from layout flow (it takes no space).
+    - Element is not rendered on screen and cannot be interacted with.
+    - Good use cases:
+        - conditional rendering (hide/show section completely)
+        - loading states where inactive content should not affect layout
+        - feature flags / role-based UI where element should not appear at all
+
+- `visibility: hidden`
+    - Element remains in layout flow (it still takes space).
+    - Element is not visible, and users cannot interact with it.
+    - Good use cases:
+        - temporarily hiding text/icon while preserving alignment
+        - reserving space to prevent layout shift (CLS)
+        - reveal-on-hover/focus patterns where stable layout is required
+*/
+
 
 test("Get text content and inner text on display-none element", async ({ page }) => {
     await page.goto("/playwright-playground/sessions/session-2-basic-operations#2-3");
