@@ -1,5 +1,19 @@
 import test, { expect } from "@playwright/test"
 
+/*
+Purpose & idea
+- Purpose:
+    - Learn how to automate common mouse-based interactions in Playwright.
+    - Validate UI behavior after each interaction with reliable assertions.
+
+- Idea:
+    - Left click: trigger normal primary action and verify success state.
+    - Right click: simulate context-click behavior.
+    - Double click: validate actions bound to double-click events.
+    - Hover: verify tooltip/hover-only content appears.
+    - Disabled check: confirm control state using both matcher and boolean methods.
+*/
+
 test("Left click action", async ({ page }) => {
     // Arrangement
     await page.goto("/playwright-playground/sessions/session-2-basic-operations#2-1");
