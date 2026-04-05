@@ -1,0 +1,145 @@
+- generic [ref=e1]:
+  - generic [ref=e2]:
+    - banner
+    - main [ref=e74]:
+      - complementary [ref=e75]:
+        - generic [ref=e76]: 🎭 Playwright Playground
+        - generic [ref=e77]: Learn by interacting
+        - navigation [ref=e79]:
+          - generic [ref=e80]:
+            - link "Session 1 — Locator Finding" [ref=e82] [cursor=pointer]:
+              - /url: /playwright-playground/sessions/session-1-locators
+            - generic [ref=e83]: "Practice: Seat Booking"
+          - generic [ref=e84]:
+            - generic [ref=e85]:
+              - link "Session 2 — Basic Operations" [ref=e86] [cursor=pointer]:
+                - /url: /playwright-playground/sessions/session-2-basic-operations
+              - button "Expand" [ref=e87] [cursor=pointer]: +
+            - generic [ref=e88]: click, fill, expect
+          - generic [ref=e89]:
+            - link "Session 3 — API Basics" [disabled] [ref=e91] [cursor=pointer]:
+              - /url: /playwright-playground/sessions/session-3-api-basics
+            - generic [ref=e92]: request, response, auth • Coming soon
+          - generic [ref=e93]:
+            - link "Session 4 — Page Object Model" [disabled] [ref=e95] [cursor=pointer]:
+              - /url: /playwright-playground/sessions/session-4-pom
+            - generic [ref=e96]: pages, fixtures, reuse • Coming soon
+          - generic [ref=e97]:
+            - link "Session 5 — Custom UI Elements" [disabled] [ref=e99] [cursor=pointer]:
+              - /url: /playwright-playground/sessions/session-5-custom-ui
+            - generic [ref=e100]: toggles, dropdowns, tricky DOM • Coming soon
+      - generic [ref=e101]:
+        - generic [ref=e102]:
+          - heading "Session 1 — Locator Finding" [level=1] [ref=e103]
+          - paragraph [ref=e104]: Practice locating seats using role, label, and test id. Gray seats are taken.
+        - generic [ref=e106]:
+          - generic [ref=e107]: Seat Booking Practice
+          - generic [ref=e108]: "Goal: click seats to select/deselect → selected seats appear in the list. Taken seats are disabled."
+          - generic [ref=e109]:
+            - generic [ref=e110]:
+              - generic [ref=e111]: Screen
+              - generic [ref=e112]:
+                - generic [ref=e113]:
+                  - generic [ref=e114]: A
+                  - generic [ref=e115]: B
+                  - generic [ref=e117]: C
+                  - generic [ref=e118]: D
+                - grid "Seat map" [ref=e119]:
+                  - row "Seat 1A Seat 1B Seat 1C Seat 1D" [ref=e120]:
+                    - generic [ref=e121]: "1"
+                    - button "Seat 1A" [pressed] [ref=e122] [cursor=pointer]
+                    - button "Seat 1B" [ref=e123] [cursor=pointer]
+                    - button "Seat 1C" [ref=e124] [cursor=pointer]
+                    - button "Seat 1D" [ref=e125] [cursor=pointer]
+                  - row "Seat 2A Seat 2B Seat 2C Seat 2D" [ref=e126]:
+                    - generic [ref=e127]: "2"
+                    - button "Seat 2A" [ref=e128] [cursor=pointer]
+                    - button "Seat 2B" [ref=e129] [cursor=pointer]
+                    - button "Seat 2C" [ref=e130] [cursor=pointer]
+                    - button "Seat 2D" [ref=e131] [cursor=pointer]
+                  - row "Seat 3A Seat 3B Seat 3C Seat 3D" [ref=e132]:
+                    - generic [ref=e133]: "3"
+                    - button "Seat 3A" [ref=e134] [cursor=pointer]
+                    - button "Seat 3B" [ref=e135] [cursor=pointer]
+                    - button "Seat 3C" [ref=e136] [cursor=pointer]
+                    - button "Seat 3D" [ref=e137] [cursor=pointer]
+                  - row "Seat 4A Seat 4B Seat 4C Seat 4D" [ref=e138]:
+                    - generic [ref=e139]: "4"
+                    - button "Seat 4A" [ref=e140] [cursor=pointer]
+                    - button "Seat 4B" [ref=e141] [cursor=pointer]
+                    - button "Seat 4C" [ref=e142] [cursor=pointer]
+                    - button "Seat 4D" [ref=e143] [cursor=pointer]
+                  - row "Seat 5A Seat 5B Seat 5C Seat 5D" [ref=e144]:
+                    - generic [ref=e145]: "5"
+                    - button "Seat 5A" [ref=e146] [cursor=pointer]
+                    - button "Seat 5B" [ref=e147] [cursor=pointer]
+                    - button "Seat 5C" [disabled] [ref=e148]
+                    - button "Seat 5D" [disabled] [ref=e149]
+                  - row "Seat 6A Seat 6B Seat 6C Seat 6D" [ref=e150]:
+                    - generic [ref=e151]: "6"
+                    - button "Seat 6A" [ref=e152] [cursor=pointer]
+                    - button "Seat 6B" [ref=e153] [cursor=pointer]
+                    - button "Seat 6C" [ref=e154] [cursor=pointer]
+                    - button "Seat 6D" [ref=e155] [cursor=pointer]
+                - generic [ref=e156]:
+                  - generic [ref=e157]: Available
+                  - generic [ref=e159]: Selected
+                  - generic [ref=e161]: Taken
+            - generic [ref=e164]:
+              - generic [ref=e165]:
+                - generic [ref=e166]:
+                  - generic [ref=e167]: Movie
+                  - combobox "Movie" [ref=e168]:
+                    - option "Interstellar" [selected]
+                    - option "Inception"
+                    - option "Dune"
+                - generic [ref=e169]:
+                  - generic [ref=e170]: Date
+                  - textbox "Date" [ref=e171]: 2026-04-05
+              - generic [ref=e172]:
+                - generic [ref=e173]: Seats
+                - list [ref=e213]:
+                  - listitem [ref=e214]: 1A
+              - generic [ref=e175]:
+                - generic [ref=e176]: Redeem
+                - textbox "Redeem" [ref=e177]:
+                  - /placeholder: e.g. SAVE50
+              - generic [ref=e178]:
+                - generic [ref=e179]:
+                  - generic [ref=e180]: Discount
+                  - strong [ref=e181]: "0"
+                - generic [ref=e182]:
+                  - generic [ref=e183]: VAT (10%)
+                  - strong [ref=e184]: "20"
+                - generic [ref=e185]:
+                  - generic [ref=e186]: Total
+                  - strong [ref=e187]: "220"
+              - generic [ref=e188]:
+                - checkbox "I agree" [checked] [active] [ref=e189]
+                - generic [ref=e190]: I agree
+              - button "Confirm" [ref=e191] [cursor=pointer]
+              - generic [ref=e192]: Confirm is enabled when you selected ≥ 1 seat and checked “I agree”.
+      - complementary [ref=e193]:
+        - generic [ref=e194]:
+          - heading "Inspector" [level=2] [ref=e195]
+          - paragraph [ref=e196]: Purpose + suggested actions + official docs
+        - generic [ref=e197]:
+          - generic [ref=e198]:
+            - generic [ref=e199]:
+              - generic [ref=e200]: Hover an element to inspect
+              - generic [ref=e201]: none
+            - paragraph [ref=e202]: Use the playground to practice finding stable locators.
+          - generic [ref=e203]:
+            - generic [ref=e204]: Selector examples
+            - generic [ref=e205]: "page.getByRole('button', { name: 'Save' }) page.getByText('Welcome') page.locator('[data-testid=\"price\"]')"
+          - generic [ref=e206]:
+            - generic [ref=e207]: What you can do
+            - list [ref=e208]:
+              - listitem [ref=e219]: Hover elements in the center panel
+              - listitem [ref=e220]: Try to guess the best locator strategy
+              - listitem [ref=e221]: Copy selector examples
+          - link "Open official docs /intro" [ref=e222] [cursor=pointer]:
+            - /url: https://playwright.dev/docs/intro
+            - text: Open official docs
+            - text: /intro
+  - alert [ref=e73]: Session 1 — Locator Finding

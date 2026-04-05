@@ -1,0 +1,7 @@
+[    1017ms] [ERROR] Failed to load resource: the server responded with a status of 404 () @ https://swongsuddee.github.io/playwright-playground/sessions/session-5-custom-ui:0
+[    1022ms] [ERROR] Failed to load resource: the server responded with a status of 404 () @ https://swongsuddee.github.io/playwright-playground/sessions/session-4-pom:0
+[    1022ms] [ERROR] Failed to load resource: the server responded with a status of 404 () @ https://swongsuddee.github.io/playwright-playground/sessions/session-3-api-basics:0
+[   23071ms] [ERROR] Failed to load resource: the server responded with a status of 404 () @ https://swongsuddee.github.io/playwright-playground/sessions/session-3-api-basics:0
+[   23071ms] [ERROR] Failed to load resource: the server responded with a status of 404 () @ https://swongsuddee.github.io/playwright-playground/sessions/session-4-pom:0
+[   23072ms] [ERROR] Failed to load resource: the server responded with a status of 404 () @ https://swongsuddee.github.io/playwright-playground/sessions/session-5-custom-ui:0
+[   95290ms] [VERBOSE] [DOM] Password field is not contained in a form: (More info: https://goo.gl/9p2vKq) %o @ https://swongsuddee.github.io/playwright-playground/sessions/session-2-basic-operations#2-2:0
