@@ -1,138 +1,235 @@
-# Playwright Complete Learning Suite
+# Bravo Playwright Learning Project
 
-A comprehensive Playwright test automation project that progresses from basic browser interactions to advanced agent-based testing patterns. This hands-on learning suite covers every essential Playwright concept through practical, real-world examples.
+## Overview
 
-## 🎯 Learning Objectives
+This repository is a Playwright learning project built around a public QA playground and a few integration examples. The project uses Playwright Test with TypeScript as the main test stack, adds `dotenv` for environment-variable loading, and uses `mysql2` for MySQL connection examples. The configured test directory is `./tests`, the default HTML reporter is enabled, and the shared `baseURL` points to `https://swongsuddee.github.io/`. Browser projects are configured for Chromium, Firefox, and WebKit, with a separate setup project named `connect-db-setup`. 
 
-Master Playwright automation through three progressive skill levels:
-- **Foundation**: Browser navigation, test organization, and basic interactions
-- **Integration**: API testing, database connections, and page object patterns  
-- **Advanced**: Intelligent agents, self-healing tests, and autonomous validation
+## Packages used in this project
 
-## 🛠 Tech Stack
+### Core test packages
+- `@playwright/test`  
+  Main Playwright test runner, fixtures, assertions, tracing, and reporter support.
+- `typescript`  
+  TypeScript compiler for writing and checking test code.
+- `@types/node`  
+  Node.js type definitions for TypeScript.
+- `ts-node`  
+  TypeScript execution support for Node-based utilities and project tooling.
 
-- **@playwright/test** - Modern test runner with built-in assertions
-- **TypeScript** - Type-safe test development
-- **MySQL2** - Database integration and data-driven testing
-- **HTML Reporter** - Rich test result visualization
+### Supporting packages
+- `dotenv`  
+  Loads environment variables from `.env` into the Playwright config and database layer.
+- `mysql2`  
+  Promise-based MySQL client used for database connection and CRUD-style examples.
 
-## 🚀 Quick Start
+## How to prepare the test project
 
+### 1. Prerequisites
+Install these first:
+- Node.js 18 or newer
+- npm
+- Git
+- MySQL 8+ only if you want to run the database examples
+
+### 2. Clone and install
 ```bash
-# Install dependencies
+git clone https://github.com/swongsuddee/20260404-bravo-playwright.git
+cd 20260404-bravo-playwright
 npm install
-
-# Install browser binaries
 npx playwright install
+```
 
-# Run all tests
+### 3. Create `.env` for MySQL tests
+The Playwright config loads variables from `.env`, and the MySQL pool reads `MYSQL_HOST`, `MYSQL_PORT`, `MYSQL_USER`, `MYSQL_PASSWORD`, and `MYSQL_DATABASE`. Create a file like this if you plan to run database-related tests:
+
+```env
+MYSQL_HOST=127.0.0.1
+MYSQL_PORT=3306
+MYSQL_USER=root
+MYSQL_PASSWORD=your_password
+MYSQL_DATABASE=demo_shop
+```
+
+### 4. Prepare folders used by tests
+This repo already contains:
+- `assets/` for upload test files
+- `downloads/` for saved download files
+
+If you recreate this project elsewhere, keep those folders because upload and download tests rely on local files and saved artifacts.
+
+### 5. Initialize the demo database
+If you want to run MySQL tests, execute the SQL in `mysql/init-db.sql` first. That script creates a database named `demo_shop` and creates tables including `users`, `products`, `orders`, and `order_items`.
+
+Example:
+```bash
+mysql -u root -p < mysql/init-db.sql
+```
+
+### 6. Run tests
+```bash
+# all tests
 npx playwright test
 
-# Run specific test suite
-npx playwright test tests/session-1/
-
-# Debug mode with browser
+# headed debugging
 npx playwright test --headed --debug
 
-# View test reports
+# one file
+npx playwright test tests/1-navigation-action.spec.ts
+
+# one folder
+npx playwright test tests/session-1/
+
+# open HTML report
 npx playwright show-report
 ```
 
-## 📋 Test Architecture Overview
+## Project structure
 
-### Foundation Level (Tests 1-7)
-**Core browser automation and test organization fundamentals**
-
-| Test File | Purpose | Key Concepts |
-|-----------|---------|--------------|
-| `1-navigation-action.spec.ts` | Browser navigation mastery | `goto()`, `goBack()`, `goForward()`, history management |
-| `2-describe-and-hooks.spec.ts` | Test lifecycle management | `beforeAll/Each`, `afterAll/Each`, scope isolation |
-| `2-parallel-execution.spec.ts` | Concurrent test execution | Parallel processing, test independence, failure isolation |
-| `2-serial-execution.spec.ts` | Sequential test execution | Serial mode, dependency chains, failure propagation |
-| `2-test-template.spec.ts` | Data-driven automation | Dynamic test generation, parameterized testing |
-| `3-text.spec.ts` | Content extraction mastery | `textContent()` vs `innerText()`, visibility handling |
-| `4-mouse-action.spec.ts` | Interactive element control | Click variations, hover effects, state validation |
-
-**Conclusion**: Foundation level establishes core Playwright APIs, test organization patterns, and basic UI interaction techniques. Students learn proper test structure, execution strategies, and fundamental browser automation.
-
-### Integration Level (Tests 8-12)
-**Advanced patterns combining UI, API, and data persistence**
-
-| Test File | Purpose | Key Concepts |
-|-----------|---------|--------------|
-| `5-keyboard-operations.spec.ts` | Advanced input handling | Key combinations, navigation, form interaction |
-| `14-api-testing.spec.ts` | HTTP API integration | Request context, REST validation, UI+API workflows |
-| `15-connect-mysql.spec.ts` | Database-driven testing | MySQL integration, CRUD operations, data persistence |
-| `session-1/seat-selection.spec.ts` | Complex UI workflows | Multi-step processes, state management, real-world scenarios |
-| `pages/seat-booking.page.ts` | Maintainable architecture | Page Object Model, locator strategies, reusable components |
-
-**Supporting Infrastructure:**
-- `mysql/connect-mysql.ts` - Database connection pooling and query management
-- `mysql/user-table.ts` - Typed data access layer with prepared statements  
-- `specs/playwright-playground-test-plan.md` - Comprehensive test design methodology
-
-**Conclusion**: Integration level demonstrates production-ready patterns combining multiple systems. Students learn to build maintainable test suites that validate end-to-end workflows across UI, API, and database layers.
-
-### Advanced Level (Agent Patterns)
-**Intelligent, self-adapting test automation**
-
-| Pattern | Purpose | Implementation |
-|---------|---------|----------------|
-| **Autonomous Test Healing** | Self-recovering locators | Dynamic selector fallback, intelligent element detection |
-| **Intelligent Data Generation** | Context-aware test data | Smart data creation based on application state and requirements |
-| **Cross-Browser Consistency** | Automated compatibility | Multi-browser validation with adaptive assertions |
-| **Performance-Aware Testing** | Built-in quality gates | Automatic performance monitoring and threshold validation |
-
-**Conclusion**: Advanced level represents the future of test automation where AI agents proactively maintain test suites, generate appropriate test data, and ensure consistent quality across environments without manual intervention.
-
-## 📚 Guided Learning Path
-
-### Phase 1: Foundation Mastery (Weeks 1-2)
-```
-Day 1-2: Navigation & Browser Control → Tests 1
-Day 3-4: Test Organization & Hooks → Test 2  
-Day 5-6: Execution Strategies → Tests 2-parallel/serial
-Day 7-8: Data-Driven Patterns → Test 2-template
-Day 9-10: Content & Interaction → Tests 3-4
+```text
+.
+├── assets/                     # files used by upload tests
+├── downloads/                  # saved files from download tests
+├── mysql/
+│   ├── connect-mysql.ts        # MySQL pool creation and disconnect helpers
+│   ├── init-db.sql             # demo schema setup
+│   ├── insert-new-user.sql     # insert statement used by user-table helper
+│   ├── select-user.sql         # select statement used by user-table helper
+│   ├── delete-user.sql         # delete statement used by user-table helper
+│   └── user-table.ts           # table-level helper functions for users
+├── specs/
+│   └── playwright-playground-test-plan.md
+├── tests/
+│   ├── pages/
+│   │   └── seat-booking.page.ts
+│   ├── session-1/
+│   │   └── seat-selection.spec.ts
+│   ├── *.spec.ts               # learning examples by topic
+│   ├── connect-db.setup.ts     # setup project file
+│   ├── example.spec.ts         # starter sample from Playwright style
+│   └── seed.spec.ts            # placeholder seed test
+├── playwright.config.ts
+├── package.json
+└── README.md
 ```
 
-### Phase 2: Integration Excellence (Weeks 3-4)  
-```
-Day 11-12: Advanced Interactions → Test 5
-Day 13-14: API Integration → Test 14
-Day 15-16: Database Connections → Test 15  
-Day 17-18: Page Object Patterns → Pages architecture
-Day 19-20: Complex Workflows → Session-1 suite
-```
+## Purpose and idea of each test file
 
-### Phase 3: Advanced Automation (Week 5+)
-```
-Day 21+: Agent-Based Testing → Implement intelligent patterns
-- Self-healing locators with fallback strategies
-- Dynamic test data generation based on application context  
-- Cross-browser consistency validation with adaptive assertions
-- Performance-aware testing with automatic threshold management
-```
+### `tests/example.spec.ts`
+A minimal starter example. It verifies the Playwright website title and the "Get started" navigation flow. Use it as the simplest reference for test syntax, basic assertions, tagging, and page interaction.
 
-## 🎓 Key Learning Outcomes
+### `tests/1-navigation-action.spec.ts`
+Introduces page navigation fundamentals. It covers `page.goto()`, opening a second page, using `page.goBack()`, and checking that the expected page heading is visible afterward. This file teaches the basic browser movement model.
 
-**After completing this suite, you will master:**
+### `tests/2-describe-and-hooks.spec.ts`
+Explains Playwright test lifecycle behavior. It uses global hooks and nested `test.describe()` hooks, with console logging to show execution order. The point is to understand scope, setup timing, and teardown timing.
 
-✅ **Playwright Fundamentals** - All core APIs, locator strategies, and assertion patterns  
-✅ **Test Architecture** - Scalable organization using POM, hooks, and modular design  
-✅ **Integration Testing** - Seamless UI+API+Database workflow validation  
-✅ **Advanced Patterns** - Data-driven testing, parallel execution, and error handling  
-✅ **Production Readiness** - CI/CD integration, reporting, and maintenance strategies  
-✅ **Future-Ready Skills** - AI-assisted testing and autonomous quality validation
+### `tests/2-parallel-execution.spec.ts`
+Demonstrates parallel execution. The tests wait for a few seconds so the execution pattern is easy to observe. One test is marked as an expected failure to show that parallel tests do not block unrelated tests.
 
-## 🏆 Project Highlights
+### `tests/2-serial-execution.spec.ts`
+Demonstrates serial execution mode with `test.describe.configure({ mode: "serial" })`. It shows how a failure in one serial test can stop later tests in the same chain. This is useful for understanding dependent workflows.
 
-This learning suite stands out through:
-- **Progressive Complexity**: Each test builds upon previous concepts
-- **Real-World Applications**: Practical scenarios using actual web applications  
-- **Modern Patterns**: Latest Playwright features and best practices
-- **Complete Coverage**: From basic clicks to advanced agent-based automation
-- **Production Focus**: Patterns used in enterprise test automation
+### `tests/2-test-template.spec.ts`
+Shows a simple data-driven pattern. A small array of test data is looped to generate multiple tests dynamically, each sending a request with different payload values. The idea is reusable template-based coverage.
 
-**Ready to become a Playwright expert? Start with Test 1 and progress through each level systematically.** 🚀
+### `tests/3-text.spec.ts`
+Focuses on reading text from the DOM. The comments explain the difference between `textContent()` and `innerText()`, especially around hidden content and rendering behavior. This file is for text assertion basics and DOM visibility awareness.
+
+### `tests/4-mouse-action.spec.ts`
+Covers mouse-based interaction concepts. Based on the repository README and file naming, this file is intended for click-related behaviors, hover-like interactions, and validating state changes triggered by pointer actions.
+
+### `tests/5-keyboard-operations.spec.ts`
+Covers keyboard input patterns. The repository README positions it as the place for key combinations, navigation, and form input handling. Treat it as the reference file for keyboard-driven UI testing.
+
+### `tests/6-select-dropdown.spec.ts`
+Targets dropdown interaction scenarios. Based on the file name and project structure, this file is for selecting options from standard or custom select controls and validating the chosen values.
+
+### `tests/7-checkbox-radio.spec.ts`
+Targets checkbox and radio-button behavior. The purpose is to practice selection logic, exclusive choice handling, checked-state assertions, and UI rules tied to those controls.
+
+### `tests/8-date-time-picker.spec.ts`
+Targets date and time picker components. The purpose is to practice selecting dates, handling calendar widgets, and validating date/time-related UI behavior.
+
+### `tests/9-toggle-operations.spec.ts`
+Targets toggle and switch controls. The idea is to verify on/off state changes and any dependent UI response triggered by those state transitions.
+
+### `tests/10-upload-operations.spec.ts`
+Covers file upload flows. It includes single-file and multi-file upload examples using `setInputFiles()`, then validates uploaded file names and preview output. This is the main reference for file input testing.
+
+### `tests/11-download-operations.spec.ts`
+Covers file download handling. It enables `acceptDownloads`, waits for the download event, saves the file into `./downloads`, then verifies both file existence and file content. This teaches Playwright download control and local file assertions.
+
+### `tests/12-scrolling-operations.spec.ts`
+Covers scroll strategies. It shows scrolling to an element, repeated scrolling by locating the last rendered item, using `PageDown`, and scrolling to the bottom and back to the top with `page.evaluate()`. This is useful for lazy-loaded or long pages.
+
+### `tests/13-colossal-operations.spec.ts`
+Covers drag-to-scroll interaction on a large horizontal content area. It calculates the viewport bounding box, performs a mouse drag, and then checks that the expected banner content appears. This is useful for carousels and large scrollable surfaces.
+
+### `tests/14-api-testing.spec.ts`
+This is the API learning file. It uses `request` against `https://jsonplaceholder.typicode.com/` for GET, POST, PUT, and DELETE examples, validates response status codes and response body shapes, and also includes a grouped scenario using `beforeAll` to prepare multiple API responses. It is the main reference for Playwright API testing basics.
+
+A detail worth noting: one test expects `userId: 12` for `GET /posts/1`, which does not match the typical JSONPlaceholder payload for post `1`. That assertion likely needs correction before treating the file as a stable reference.
+
+### `tests/15-connect-mysql.spec.ts`
+This is the MySQL integration example. It connects before all tests, reads users, inserts a generated user, deletes the last user, and disconnects after all tests. Use it to learn the basic pattern for DB-backed tests, not yet as a hardened production test suite.
+
+### `tests/connect-db.setup.ts`
+Configured as a Playwright setup project dependency in `playwright.config.ts`, but the file content is currently commented out. In practice, it acts as a placeholder for future shared database setup. Right now, it does not establish a live DB connection by itself.
+
+### `tests/seed.spec.ts`
+A placeholder seed file. It contains only a stub test and no real implementation. This suggests the repo author planned a data-seeding flow but has not implemented it yet.
+
+## Supporting test files
+
+### `tests/pages/seat-booking.page.ts`
+This is the Page Object Model for the seat-booking practice flow. It wraps locators and business-level actions such as selecting seats, checking pricing, checking the agreement checkbox, and validating button state. Its purpose is to keep the spec readable and reusable.
+
+### `tests/session-1/seat-selection.spec.ts`
+This is the most structured UI scenario in the repo. It uses the `SeatBookingPage` POM and validates seat selection, deselection, multi-seat pricing, and seat list state. It is the clearest example of how to turn a playground exercise into a realistic end-to-end UI scenario.
+
+## MySQL helper layer
+
+### `mysql/connect-mysql.ts`
+Creates a MySQL connection pool from environment variables and exposes `connect()` and `disconnect()` helpers. This is the shared DB connection entry point.
+
+### `mysql/user-table.ts`
+Acts as a small table helper or repository layer for user operations. It is referenced by `15-connect-mysql.spec.ts` for reading users and doing insert/delete actions.
+
+### `mysql/init-db.sql`
+Bootstraps the demo schema. Use it before running DB-related tests.
+
+### `mysql/select-user.sql`, `mysql/insert-new-user.sql`, `mysql/delete-user.sql`
+These SQL files keep raw queries outside the test code. The idea is cleaner test code and easier query reuse.
+
+## Notes and caveats
+
+- The project is designed as a learning suite more than a finished production framework.
+- The browser projects depend on `connect-db-setup`, but that setup file is currently commented out.
+- Database tests require a working MySQL instance and a valid `.env` file.
+- Upload tests require the image files in `assets/`.
+- Download tests save files under `downloads/` and validate their contents.
+- API tests are independent from the UI playground because they point to JSONPlaceholder instead of the site configured in `baseURL`.
+
+## Suggested learning order
+
+1. `example.spec.ts`
+2. `1-navigation-action.spec.ts`
+3. `2-describe-and-hooks.spec.ts`
+4. `2-parallel-execution.spec.ts`
+5. `2-serial-execution.spec.ts`
+6. `2-test-template.spec.ts`
+7. `3-text.spec.ts`
+8. `4-mouse-action.spec.ts`
+9. `5-keyboard-operations.spec.ts`
+10. `6-select-dropdown.spec.ts`
+11. `7-checkbox-radio.spec.ts`
+12. `8-date-time-picker.spec.ts`
+13. `9-toggle-operations.spec.ts`
+14. `10-upload-operations.spec.ts`
+15. `11-download-operations.spec.ts`
+16. `12-scrolling-operations.spec.ts`
+17. `13-colossal-operations.spec.ts`
+18. `14-api-testing.spec.ts`
+19. `15-connect-mysql.spec.ts`
+20. `tests/session-1/seat-selection.spec.ts`
 
