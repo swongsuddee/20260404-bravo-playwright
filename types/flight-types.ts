@@ -1,0 +1,1 @@
+export type FlightTypes = "goAndReturn" | "oneWay" | "multiCity";
