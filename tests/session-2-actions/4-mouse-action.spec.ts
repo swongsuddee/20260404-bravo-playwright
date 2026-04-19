@@ -21,7 +21,7 @@ test("Left click action", async ({ page }) => {
     // Actions
     // { name: "Save" } => Save, save, xxx save xxx
     // { name: "Save", exact: true } => Save <= exactly matched
-    const buttonLocator = page.getByRole("button", { name: "Save", exact: true });
+    const buttonLocator =  page.getByRole("button", { name: "Save" });
     // await buttonLocator.click({ button: "left" }); // default button
     await buttonLocator.click();
 

@@ -8,6 +8,8 @@ import dotenv from 'dotenv';
 import path from 'path';
 dotenv.config({ path: path.resolve(__dirname, '.env') });
 
+export const dowloadPath = "";
+
 /**
  * See https://playwright.dev/docs/test-configuration.
  */
@@ -30,6 +32,8 @@ export default defineConfig({
 
     /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
     trace: 'on-first-retry',
+
+    acceptDownloads: false
   },
 
   /* Configure projects for major browsers */

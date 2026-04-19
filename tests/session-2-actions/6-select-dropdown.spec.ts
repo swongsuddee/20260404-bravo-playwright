@@ -87,11 +87,10 @@ test("Multi-select dropdown", async ({ page }) => {
 
   // Read selected <option> values directly from the native <select> element
   // to validate the real form state (not just rendered text).
-  const values = await selectLanguages
-    .evaluate((el) => {
-      const select = el as any;
-      return Array.from(select.selectedOptions).map((o: any) => o.value);
-    });
+  const values = await selectLanguages.evaluate((el) => {
+    const select = el as any;
+    return Array.from(select.selectedOptions).map((o: any) => o.value);
+  });
   expect(values).toEqual(["ts", "python"]);
 });
 

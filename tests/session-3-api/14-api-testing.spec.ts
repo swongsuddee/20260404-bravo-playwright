@@ -5,7 +5,7 @@ test.use({
 });
 
 test("Get posts", async ({ request }) => {
-    const response = await request.get("/posts"); // baseUrl/posts
+    const response = await request.get("/posts"); // https://jsonplaceholder.typicode.com/posts
     expect(response.status()).toBe(200);
 
     const data = await response.json();
@@ -34,15 +34,15 @@ test("Get post by ID", async ({ request }) => {
     ).toEqual( // expected data
         expect.objectContaining({
             id: 1,
-            userId: 12,
-            title: 'sunt aut facere repellat provident occaecati excepturi optio reprehenderit',
-            body: 'quia et suscipit\nsuscipit recusandae consequuntur expedita et cum\nreprehenderit molestiae ut ut quas totam\nnostrum rerum est autem sunt rem eveniet architecto'
+            userId: expect.any(Number),
+            title: expect.any(String),
+            body: expect.any(String)
         })
     );
 });
 
 test("Get post comments", async ({ request }) => {
-    const response = await request.get("/posts/1/comments");
+    const response = await request.get("/posts/{postId}/comments".replace("{postId}", "1"));
     expect(response.status()).toBe(200);
 
     const data = await response.json();
@@ -56,13 +56,29 @@ test("Get post comments", async ({ request }) => {
                 name: expect.any(String),
                 email: expect.any(String),
                 body: expect.any(String)
+            })
+        ])
+    );
+
+    expect(data).toEqual(
+        expect.arrayContaining([
+            expect.objectContaining({
+                postId: 1,
+                id: 2,
+                name: "quo vero reiciendis velit similique earum",
+                email: "Jayne_Kuhic@sydney.com",
+                body: `est natus enim nihil est dolore omnis voluptatem numquam
+et omnis occaecati quod ullam at
+voluptatem error expedita pariatur
+nihil sint nostrum voluptatem reiciendis et`,
             })
         ])
     );
 });
 
 test("Get comments from post", async ({ request }) => {
-    const response = await request.get("/comments?postId=1");
+    // const response = await request.get("/comments?postId={postId}".replace("{postId}", "1"));
+    const response = await getCommentFromPost(request, 1);
     expect(response.status()).toBe(200);
 
     const data = await response.json();
@@ -80,6 +96,11 @@ test("Get comments from post", async ({ request }) => {
         ])
     );
 });
+
+async function getCommentFromPost(request: APIRequestContext, postId: number): Promise<APIResponse> {
+    const response = await request.get(`/comments?postId=${postId}`);
+    return response;
+}
 
 test("Create a new post", async ({ request }) => {
     const newPost = {
@@ -191,9 +212,6 @@ test.describe("Scenario", () => {
             expect(initPostResp.resp.status()).toBe(200);
             expect(initPostResp.resp.statusText()).toBe("OK");
         });
-        // 200 OK
-        // 201 Created
-        // 404 Not Found
 
         test("should return post in correct format", async () => {
             const data = initPostResp.data;

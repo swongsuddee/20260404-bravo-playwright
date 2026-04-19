@@ -1,6 +1,6 @@
 import test from "@playwright/test";
-import { connect, disconnect } from "../mysql/connect-mysql";
-import { addUser, deleteUser, getUsers } from "../mysql/user-table";
+import { connect, disconnect } from "../../mysql/connect-mysql";
+import { addUser, deleteUser, getUsers } from "../../mysql/user-table";
 
 test.beforeAll(async () => {
     await connect();

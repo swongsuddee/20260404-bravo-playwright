@@ -90,16 +90,3 @@ test("Input password with masking", async ({ page }) => {
 });
 //#endregion
 
-// sync => synchronous (not concurrent)
-// |---t1---|
-//          |---t2---|
-//                   |---t3---|
-
-// async => asynchronous (concurrent)
-// await => wait until ...
-// |---t1---|
-// |---t2---|
-//       |---t3---|
-
-// await |---t1---|
-// await          |---t2---|
